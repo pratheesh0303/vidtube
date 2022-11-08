@@ -7,9 +7,13 @@ import userRoute from "./routes/user.js";
 import videoRoute from "./routes/video.js";
 import commentRoute from "./routes/comment.js";
 import path from "path";
+import { fileURLToPath } from 'url';
+
 
 const App = express();
+const __filename = fileURLToPath(import.meta.url);
 
+const __dirname = path.dirname(__filename);
 dotenv.config();
 const connect = ()=>{
     mongoose.connect(process.env.MONGODB).then(()=>{
