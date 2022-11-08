@@ -6,6 +6,7 @@ import authRoute from "./routes/authentication.js";
 import userRoute from "./routes/user.js";
 import videoRoute from "./routes/video.js";
 import commentRoute from "./routes/comment.js";
+const path = require('path');
 
 const App = express();
 
