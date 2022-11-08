@@ -16,7 +16,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 App.use(express.static('client/build'));
 App.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname + '/client/build/index.html'));
+    res.sendFile(path.join(__dirname + 'client/build/index.html'));
     });
 dotenv.config();
 const connect = ()=>{
