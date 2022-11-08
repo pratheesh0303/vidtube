@@ -38,7 +38,7 @@ App.use((err, req, res, next)=>{
     })
 })
 
-App.use(express.static('client/build'));
+App.use(express.static('/client/build'));
 App.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/client/build/index.html'));
     });
