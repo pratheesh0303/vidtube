@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
+    "heroku-postbuild": "cd client && npm install && npm run build"
     
   },
   "author": "Pratheesh",
@@ -20,7 +20,6 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.6.5",
     "nodemon": "^2.0.20",
-    "node": "18.12.1",
-    "npm": "8.19.2"
+    "node": "18.12.1"
   }
 }
