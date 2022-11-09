@@ -19,7 +19,7 @@ const VideoContainer = styled.div`
 
 const VideoList = ({ size, type }) => {
   const [videos, setVideos] = useState([]);
-  const [filteredvideos, setfilteredVideos] = useState(videos);
+  const [filteredvideos, setfilteredVideos] = useState([]);
   const [searchField, setSearchField] = useState('');
   const dispatch = useDispatch();
   const user = useSelector((state) => state.users.loggedinUser);
