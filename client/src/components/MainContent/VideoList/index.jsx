@@ -64,7 +64,7 @@ const VideoList = ({ size, type }) => {
   
   return (
     <ListContainer size={size}>
-      {filteredvideos && filteredvideos.length && filteredvideos?.map((video) => {
+      {filteredvideos && filteredvideos.length && filteredvideos.map((video) => {
         return (
           <Link key={video._id} to={user?`/video/${video._id}`:`/login`} style={{ textDecoration: "none" }}>
             <VideoContainer key={video._id} size={size}>
