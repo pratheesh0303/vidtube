@@ -14,19 +14,7 @@ const App = express();
 const __filename = fileURLToPath(import.meta.url);
 
 const __dirname = path.dirname(__filename);
-if ( process.env.NODE_ENV == "production"){
 
-    App.use(express.static("client/build"));
-
-
-    App.get("*", (req, res) => {
-
-        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-
-    })
-
-
-}
 dotenv.config();
 const connect = ()=>{
     mongoose.connect(process.env.MONGODB).then(()=>{
@@ -41,6 +29,19 @@ App.use("/api/users", userRoute);
 App.use("/api/videos", videoRoute);
 App.use("/api/comments", commentRoute);
 
+if ( process.env.NODE_ENV == "production"){
+
+    App.use(express.static("client/build"));
+
+
+    App.get("*", (req, res) => {
+
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+
+    })
+
+
+}
 App.use((err, req, res, next)=>{
     const status = err.status || 500;
     const message = err.message || "something went wrong";
