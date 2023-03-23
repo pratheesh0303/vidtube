@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import {axiosInstance as axios} from "../../config";
+import axios from 'axios';
 import {
   loginFailure,
   loginStart,

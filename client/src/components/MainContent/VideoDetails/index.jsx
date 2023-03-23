@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import {axiosInstance as axios} from "../../../config";
+import axios from 'axios';
 import {
   ThumbUpOutlined,
   ThumbDownOutlined,

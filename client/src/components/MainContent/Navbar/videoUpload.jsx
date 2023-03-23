@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { redirect } from "react-router-dom";
 import styled from "styled-components";
-import {axiosInstance as axios} from "../../../config";
+import axios from 'axios';
 import S3FileUpload, { uploadFile } from "react-s3";
 import { Buffer } from "buffer";
 Buffer.from("anything", "base64");

@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import styled from "styled-components";
-import {axiosInstance as axios} from "../../config";
+import axios from 'axios';
 import { logout, updateUserDetails } from "../../redux/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 import S3FileUpload, { uploadFile } from "react-s3";
