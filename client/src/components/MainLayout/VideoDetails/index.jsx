@@ -210,7 +210,7 @@ const VideoDetails = ({ type }) => {
       };
       updateVideoView();
     }
-  }, [last24HrsViewsCompleted, video._id, videoPlayed30s]);
+  }, [!videoPlayed30s]);
 
   return (
     <VideoDetailsContainer>
