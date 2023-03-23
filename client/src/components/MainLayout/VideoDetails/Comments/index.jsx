@@ -1,5 +1,5 @@
 import { SendOutlined } from "@mui/icons-material";
-import axios from 'axios';
+import {axiosInstance as axios} from "../../../../config";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
@@ -35,7 +35,7 @@ const Comments = ({ videoId }) => {
       } catch (error) {}
     };
     fetchComments();
-  }, [commeneted]);
+  }, [commeneted, videoId]);
 
   const createComment = async () => {
     await axios.post(`/comments`, {

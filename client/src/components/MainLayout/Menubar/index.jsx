@@ -17,17 +17,6 @@ const MenubarContainer = styled.div`
   top: 0;
   padding: 1.5rem 1.5rem;
 `;
-
-const Logo = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 2rem;
-`;
-
-const Image = styled.img`
-  height: 4rem;
-`;
-const Title = styled.h3``;
 const Item = styled.div`
   display: flex;
   align-items: center;
@@ -43,6 +32,7 @@ const SignInContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-decoration: none;
 `;
 const Button = styled.button`
   margin-top: 0.8rem;
@@ -62,12 +52,6 @@ const Menubar = () => {
   const user = useSelector((state) => state.users.loggedinUser);
   return (
     <MenubarContainer>
-      <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
-        <Logo>
-          <Image src="/images/logo.png" />
-          <Title>VidTube</Title>
-        </Logo>
-      </Link>
       <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
         <Item>
           <HomeOutlined />
@@ -107,10 +91,10 @@ const Menubar = () => {
       {!user ? (
         <SignInContainer>
           Sign in to like videos, comment and subscribe.
-          <Link to="/login">
+          <Link  style={{ textDecoration: 'none' }} to="/login">
             <Button>
               <AccountCircleOutlined />
-              <span>Signin</span>
+              <span>Sign in</span>
             </Button>
           </Link>
         </SignInContainer>

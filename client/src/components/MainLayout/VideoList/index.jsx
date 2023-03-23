@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
+import {axiosInstance as axios} from "../../../config";
 import styled from "styled-components";
 import Video from "./Video";
 import { Link } from "react-router-dom";

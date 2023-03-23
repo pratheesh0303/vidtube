@@ -4,6 +4,7 @@ const initialState = {
   loggedinUser: null,
   isLoading: false,
   error: false,
+  channel: null,
 };
 
 export const userSlice = createSlice({
@@ -25,6 +26,7 @@ export const userSlice = createSlice({
       return initialState;
     },
     subscribed: (state, action) => {
+      console.log(state, action)
       if (!state.loggedinUser.subscribed.includes(action.payload)) {
         state.loggedinUser.subscribed.push(action.payload);
       }

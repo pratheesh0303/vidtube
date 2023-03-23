@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import axios from 'axios';
+import {axiosInstance as axios} from "../../../config";
 import {
   ThumbUpOutlined,
   ThumbDownOutlined,
@@ -15,15 +15,15 @@ import {
   dislike,
   fetchVideoSuccess,
   like,
-  notFetching,
 } from "../../../redux/videoSlice";
 import { subscribed, unsubscribed } from "../../../redux/userSlice";
 import { format } from "timeago.js";
+import { BounceLoader } from "react-spinners";
 const VideoDetailsContainer = styled.div`
   display: flex;
   gap: 3rem;
   width: 100%;
-  margin: 2rem;
+ padding: 1rem;
 `;
 const VideoContent = styled.div`
   flex: 5;
@@ -210,20 +210,25 @@ const VideoDetails = ({ type }) => {
       };
       updateVideoView();
     }
-  }, [!videoPlayed30s]);
+  }, [last24HrsViewsCompleted, video._id, videoPlayed30s]);
 
   return (
     <VideoDetailsContainer>
+      {console.log(channel)}
       <VideoContent>
         <VideoContainer>
+        {!video?
+        <BounceLoader color="#36d7b7" />
+        :
           <Video
             ref={videoRef}
             preload="auto"
+            autoPlay={true}
             onTimeUpdate={play}
             src={video?.videoUrl}
             id={video?._id}
             controls
-          ></Video>
+          ></Video>}
         </VideoContainer>
         <Title>{video?.title}</Title>
         <ChannelDescription>{video?.description}</ChannelDescription>

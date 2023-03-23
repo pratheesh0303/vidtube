@@ -27,7 +27,7 @@ export const signin = async (req, res, next) =>{
         if(!user) return next(createError(404, "User Not Found"));
         const {password, ...others} = user._doc;
         const match = await bcrypt.compare(req.body.password, user.password);
-        if(!match) return next(createError(401, "wrong Credentials"));
+        if(!match) return next(createError(401, "Wrong Credentials"));
         const token = jwt.sign({id: user._id}, process.env.JWT);
         res.cookie("access_token", token, {
             httpOnly: true

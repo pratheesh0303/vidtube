@@ -4,11 +4,12 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import styled from "styled-components";
-import axios from 'axios';
+import {axiosInstance as axios} from "../../config";
 import { logout, updateUserDetails } from "../../redux/userSlice";
 import { useSelector, useDispatch } from "react-redux";
-import S3FileUpload, { uploadFile } from "react-s3";
+import S3FileUpload from "react-s3";
 import { Buffer } from "buffer";
+import { useNavigate } from "react-router-dom";
 Buffer.from("anything", "base64");
 window.Buffer = window.Buffer || require("buffer").Buffer;
 
@@ -23,7 +24,6 @@ const style = {
   position: "absolute",
   top: "10%",
   right: "1%",
-  width: 400,
   bgcolor: "#121212",
   outline: "none",
   padding: "3rem",
@@ -50,6 +50,7 @@ const Progress = styled.span`
 export default function Profile({ open, handleClose }) {
   const currentUser = useSelector((state) => state.users.loggedinUser);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [user, setUser] = useState({});
   const [name, setName] = useState(null);
   const [image, setImage] = useState(null);
@@ -63,7 +64,7 @@ export default function Profile({ open, handleClose }) {
       setImage(userData.data.image);
     };
     fetchUser();
-  }, []);
+  }, [currentUser._id] );
 
   const fileUpload = (file) => {
     setProgress("Profile image is processing...")
@@ -93,6 +94,7 @@ export default function Profile({ open, handleClose }) {
 
   const logOut = () => {
     dispatch(logout());
+    navigate('/')
   };
 
   return (

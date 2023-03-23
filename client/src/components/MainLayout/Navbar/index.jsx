@@ -67,6 +67,17 @@ const NavbarContainer = styled.div`
     color: #ffffff;
     font-size: 1.2rem;
   `;
+  const Logo = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+  const LogoImage = styled.img`
+  height: 4rem;
+`;
+const Title = styled.h3`
+  color: white;
+`;
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -93,6 +104,12 @@ const Navbar = () => {
   return (
     <>
       <NavbarContainer>
+      <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
+        <Logo>
+          <LogoImage src="/images/logo.png" />
+          <Title>VidTube</Title>
+        </Logo>
+      </Link>
         <SearchContainer>
           <Search  onChange={changeInput} value={searchWord}/>
           <Icon>
@@ -100,10 +117,11 @@ const Navbar = () => {
           </Icon>
         </SearchContainer>
         <RightSideContent>
+        {user ?
           <VideoCallOutlined
             onClick={() => openModal(true)}
             style={{ fontSize: "2rem", color: "#FFFFFF", cursor: "pointer" }}
-          />
+          /> :''}
           {user ? (
             <>
               <UserContainer onClick={() => handleOpenProfileModal(true)}>
@@ -118,10 +136,10 @@ const Navbar = () => {
               )}
             </>
           ) : (
-            <Link to="/login">
+            <Link style={{ textDecoration: 'none' }} to="/login">
               <Button>
                 <AccountCircleOutlined />
-                <span>Signin</span>
+                <span>Sign in</span>
               </Button>
             </Link>
           )}

@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import axios from 'axios';
+import {axiosInstance as axios} from "../../config";
 import {
   loginFailure,
   loginStart,
   loginSuccess,
-  logout,
 } from "../../redux/userSlice";
 import { auth, provider } from "../../firebase";
 import { signInWithPopup } from "firebase/auth";
@@ -21,8 +20,8 @@ const LoginContainer = styled.div`
 `;
 
 const LoginWrapper = styled.div`
-  height: 400px;
-  width: 300px;
+  height: 500px;
+  width: 400px;
   background: transparent;
   display: flex;
   justify-content: center;
@@ -30,17 +29,27 @@ const LoginWrapper = styled.div`
   flex-direction: column;
   gap: 0.6rem;
   border: 1px solid gray;
+  border-radius: 20px;
+  background: transparent;
 `;
 const Title = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  font-size: 28px;
 `;
 const Image = styled.img`
   height: 50px;
   width: 50px;
 `;
-const Input = styled.input``;
+const WebsiteTitle  = styled.p`
+  color: red;
+  font-weight: 900;
+`;
+const Input = styled.input`
+  padding: 10px;
+  width: 250px;
+`;
 const Button = styled.button`
   background: red;
   color: white;
@@ -48,6 +57,7 @@ const Button = styled.button`
   border-radius: 3px;
   padding: 0.5rem 0.8rem;
   cursor: pointer;
+  min-width: 280px;
 `;
 const SignupContainer = styled.div`
   margin-top: 1rem;
@@ -72,7 +82,12 @@ const Login = () => {
   const [error, setLoginError] = useState("");
   
   const handleLogin = async (e) => {
+    setLoginError('');
     e.preventDefault();
+    if(userName === '' || password === '') {
+      setLoginError('Please fill all the fields.');
+      return;
+    }
     dispatch(loginStart());
     try {
       const response = await axios.post("/auth/signin", {
@@ -87,9 +102,14 @@ const Login = () => {
     }
   };
   const handleSignup = async (e) => {
+    setLoginError('');
     e.preventDefault();
+    if(userName === '' || password === '' || email === '') {
+      setLoginError('Please fill all the fields.');
+      return;
+    }
     try {
-      const response =await axios.post("/auth/signup", {
+      await axios.post("/auth/signup", {
         name: userName,
         password,
         email,
@@ -120,7 +140,7 @@ const Login = () => {
       <LoginWrapper>
         <Title>
           <Image src="/images/logo.png" />
-          <span>Vidtube</span>
+          <WebsiteTitle>Vidtube</WebsiteTitle>
         </Title>
         {error && <Error>{error}</Error>}
         {location.pathname === "/login" ? (
@@ -128,6 +148,7 @@ const Login = () => {
             type="text"
             id="username"
             placeholder="username"
+            required
             onChange={(e) => setUserName(e.target.value)}
           />
         ) : (

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { redirect } from "react-router-dom";
 import styled from "styled-components";
-import axios from 'axios';
-import S3FileUpload, { uploadFile } from "react-s3";
+import CloseIcon from '@mui/icons-material/Close';
+import {axiosInstance as axios} from "../../../config";
+import S3FileUpload from "react-s3";
+import BarLoader from "react-spinners/BarLoader";
 import { Buffer } from "buffer";
 Buffer.from("anything", "base64");
 window.Buffer = window.Buffer || require("buffer").Buffer;
@@ -10,13 +12,14 @@ window.Buffer = window.Buffer || require("buffer").Buffer;
 const MainContainer = styled.div`
   width: 100%;
   height: 100vh;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  background-color: #363a3b;
+  background-color: slategrey;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 999999;
 `;
 const ModalContainer = styled.div`
   width: 30rem;
@@ -56,7 +59,7 @@ const Button = styled.button`
   text-align: center;
 `;
 const Status = styled.span`
-  color: green;
+  color: #66fd66;
 `;
 
 const config = {
@@ -118,7 +121,7 @@ const VideoUpload = ({handleCloseUpload}) => {
   };
 
   const createVideo = async () => {
-    const response = await axios.post("/videos", {
+    await axios.post("/videos", {
       title: title,
       description: description,
       imageUrl: thumbnailUrl,
@@ -130,7 +133,7 @@ const VideoUpload = ({handleCloseUpload}) => {
     <MainContainer>
       <ModalContainer>
         <Title>Upload a new video</Title>
-        <Close onClick={handleCloseUpload}>X</Close>
+        <Close onClick={handleCloseUpload}><CloseIcon/></Close>
         <Input
           type="file"
           id="videoupload"
@@ -138,6 +141,7 @@ const VideoUpload = ({handleCloseUpload}) => {
           onChange={(e) => renameFile(e, "video")}
         />
         <Status>{videoUploaded}</Status>
+        {videoUploaded !== '' && videoUploaded !== "video processing completed" && <BarLoader color="#36d7b7" />}
         <Input
           type="text"
           placeholder="Video Title"
@@ -164,12 +168,13 @@ const VideoUpload = ({handleCloseUpload}) => {
           onChange={(e) => renameFile(e, "thumbnail")}
         />
         <Status>{thumbnailUploaded}</Status>
+        {thumbnailUploaded !== '' && thumbnailUploaded !== "Thumbnail image processing completed" && <BarLoader color="#36d7b7" />}
         <Button
           disabled={
-            videoUploaded != "video processing completed" ||
-            thumbnailUploaded != "Thumbnail image processing completed" ||
-            title == "" ||
-            description == ""
+            videoUploaded !== "video processing completed" ||
+            thumbnailUploaded !== "Thumbnail image processing completed" ||
+            title === "" ||
+            description === ""
           }
           onClick={()=>{
             createVideo();
