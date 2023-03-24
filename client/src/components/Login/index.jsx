@@ -140,7 +140,7 @@ const Login = () => {
       <LoginWrapper>
         <Title>
           <Image src="/images/logo.png" />
-          <WebsiteTitle>Vidtube</WebsiteTitle>
+          <WebsiteTitle>VideoTube</WebsiteTitle>
         </Title>
         {error && <Error>{error}</Error>}
         {location.pathname === "/login" ? (

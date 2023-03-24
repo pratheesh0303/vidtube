@@ -107,7 +107,7 @@ const Navbar = () => {
       <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
         <Logo>
           <LogoImage src="/images/logo.png" />
-          <Title>VidTube</Title>
+          <Title>VideoTube</Title>
         </Logo>
       </Link>
         <SearchContainer>
