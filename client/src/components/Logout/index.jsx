@@ -133,7 +133,7 @@ export default function Profile({ open, handleClose }) {
             <Button onClick={updateUser}>Update User</Button>
             <br />
             <br />
-            <Button onClick={logOut}>Logout</Button>
+            <Button onClick={logOut}>Sign out</Button>
             <br />
             <br />
           </Form>

@@ -228,6 +228,9 @@ const VideoDetails = ({ type }) => {
             src={video?.videoUrl}
             id={video?._id}
             controls
+            controlsList="nodownload"
+            height={500}
+            width={'auto'}
           ></Video>}
         </VideoContainer>
         <Title>{video?.title}</Title>
